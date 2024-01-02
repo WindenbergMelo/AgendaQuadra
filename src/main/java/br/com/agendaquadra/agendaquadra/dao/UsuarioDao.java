@@ -10,6 +10,9 @@ import br.com.agendaquadra.agendaquadra.Models.Usuario;
 
 public interface UsuarioDao extends JpaRepository<Usuario, Integer> {
     
+    @Query("SELECT u FROM Usuario u WHERE u.id = :id")
+    public Usuario findById(int id);
+
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
     public Usuario findByEmail(String email);
 

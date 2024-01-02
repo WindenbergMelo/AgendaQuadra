@@ -138,21 +138,17 @@
                                 <td th:text="${usuario.email}">
                                 </td>
 
-                                <td th:text="${usuario.ativo}">
+                                <td th:text="${usuario.status}">
                                 </td>
 
-                                <form method="post">
-                                    <td style="text-align:center; color: #397bff; fant-weight: bold;"><span>Ativo</span></td>
-                                    <td style="text-align:center;" data-name="">
-                                        <a href='edituser.php?id='><i class='fa fa-edit fa-1x'></i></a>
-                                        <a href='excluiruser.php?id=" . $id . "'data-ativo='Deseja desativar esse registro?' title='Bloquear registro'><i class='fa fa-unlock fa-1x'></i></a>
-                                    </td>
-
-                                    <td style="text-align:center; color: red; fant-weight: bold;"><span>Inativo</span></td>
-                                    <td style="text-align:center;" data-name="<?php echo $row_['id'] ?>">
-                                        <a href='edituser.php?id=""'><i class='fa fa-edit fa-1x'></i></a>
-                                        <a href='excluiruser.php?id=" . $id . "'data-inativo='Deseja desativar esse registro?' title='Liberar registro' style='color:red;'><i class='fa fa-lock fa-1x'></i></a>
-                                    </td>
+                                <td style="text-align:center;" data-name="">
+                                    <a href='edituser.php?id='><i class='fa fa-edit fa-1x'></i></a>
+                                    <a th:href="${(#mvc.url('UC#ativarRegistro').arg(0, usuario.id)).build()}" data-ativo='Deseja desativar esse registro?' title='Ativar registro'><i class='fa fa-unlock fa-1x'></i></a>
+                                </td>
+                                <td style="text-align:center;" data-name="">
+                                    <a href='edituser.php?id=""'><i class='fa fa-edit fa-1x'></i></a>
+                                    <a th:href="${(#mvc.url('UC#desativarRegistro').arg(0, usuario.id)).build()}" data-inativo='Deseja desativar esse registro?' title='bloquear registro' style='color:red;'><i class='fa fa-lock fa-1x'></i></a>
+                                </td>
 
                             </tr>
                     </tbody>

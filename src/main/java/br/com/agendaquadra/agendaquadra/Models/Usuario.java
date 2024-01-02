@@ -26,6 +26,8 @@ public class Usuario {
     private String senha;
     @Column(name = "ativo", nullable = false)
     private int ativo;
+    @Column(name = "status", length = 255, nullable = false)
+    private String status;
     @Column(name = "tipo_acesso", length = 100, nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoAcesso tipoacesso;
@@ -71,6 +73,14 @@ public class Usuario {
 
     public int getAtivo() {
         return ativo;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setAtivo(int ativo) {

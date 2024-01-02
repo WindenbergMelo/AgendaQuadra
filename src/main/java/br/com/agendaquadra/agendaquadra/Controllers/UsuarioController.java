@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,6 +74,18 @@ public class UsuarioController {
         return mv;
     }
 
+    @GetMapping("/desativarRegistro/{userId}")
+    public String desativarRegistro(@PathVariable int userId) {
+        serviceUsuario.blockRegistro(userId);
+        return "redirect:/listcliente"; 
+    }
+
+    @GetMapping("/ativarRegistro/{userId}")
+    public String ativarRegistro(@PathVariable int userId) {
+        serviceUsuario.activeRegistro(userId);
+        return "redirect:/listcliente"; 
+    }
+
     @GetMapping("/cadastro")
     public ModelAndView cadastro(Usuario usuario){
         ModelAndView mv = new ModelAndView();
@@ -103,6 +116,7 @@ public class UsuarioController {
         // Defina um valor padrão para tipoacesso, por exemplo, "Usuario"
         usuario.setTipoacesso(TipoAcesso.USUARIO);
         usuario.setAtivo(1);
+        usuario.setStatus("Ativo");
         // Se não houver erros, salva o usuário e redireciona para /login
         usuariorepositorio.save(usuario);
         mv.setViewName("redirect:/login");
