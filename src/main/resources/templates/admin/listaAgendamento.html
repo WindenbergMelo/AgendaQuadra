@@ -146,8 +146,9 @@
                                 <td th:text="${pedidos.aceito}">
                                 </td>
                                 <td><form method="post">
-                                <a href='aceitaragendamento.php?id=" . $id . "' class='btn text-light btn-success' value='Aceito'>Aceitar</a>
-                                <a href='negaragendamento.php?id=" . $id . "' class='btn text-light btn-danger' value='Negado'>Negar</a>
+                                  
+                                <a th:href="${(#mvc.url('AC#ativarPedido').arg(0, pedidos.id)).build()}" class='btn text-light btn-success' value='Aceito'>Aceitar</a>
+                                <a th:href="${(#mvc.url('AC#negarPedido').arg(0, pedidos.id)).build()}" class='btn text-light btn-danger' value='Negado'>Negar</a>
                                  </td>
                                </td>
 

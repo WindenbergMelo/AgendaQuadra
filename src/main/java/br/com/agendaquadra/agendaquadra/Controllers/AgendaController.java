@@ -1,17 +1,14 @@
 package br.com.agendaquadra.agendaquadra.Controllers;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.agendaquadra.agendaquadra.Enums.TipoAcesso;
 import br.com.agendaquadra.agendaquadra.Models.Agenda;
-import br.com.agendaquadra.agendaquadra.Models.Usuario;
+import br.com.agendaquadra.agendaquadra.Service.ServiceAgendamento;
 import br.com.agendaquadra.agendaquadra.dao.AgendaDao;
 
 @Controller
@@ -19,6 +16,9 @@ public class AgendaController {
     
     @Autowired
     private AgendaDao agendamentoRepo;
+
+    @Autowired
+    private ServiceAgendamento serviceAgendamento;
 
     @GetMapping("/agendamento")
     public ModelAndView agendamento(Agenda agenda){
@@ -46,5 +46,16 @@ public class AgendaController {
         return mv;
     }
 
+    @GetMapping("/ativarPedido/{agendaId}")
+    public String ativarPedido(@PathVariable int agendaId) {
+        serviceAgendamento.ativarAgenda(agendaId);
+        return "redirect:/listpedidos"; 
+    }
+
+    @GetMapping("/negarPedido/{agendaId}")
+    public String negarPedido(@PathVariable int agendaId) {
+        serviceAgendamento.negarAgenda(agendaId);
+        return "redirect:/listpedidos"; 
+    }
     
 }
