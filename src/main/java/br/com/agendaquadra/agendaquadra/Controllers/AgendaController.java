@@ -1,12 +1,17 @@
 package br.com.agendaquadra.agendaquadra.Controllers;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.agendaquadra.agendaquadra.Enums.TipoAcesso;
 import br.com.agendaquadra.agendaquadra.Models.Agenda;
+import br.com.agendaquadra.agendaquadra.Models.Usuario;
 import br.com.agendaquadra.agendaquadra.dao.AgendaDao;
 
 @Controller
@@ -32,4 +37,14 @@ public class AgendaController {
         return mv;
     }
 
+    @GetMapping("/listpedidos")
+    public ModelAndView listPedidos(){
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/listaAgendamento");
+        mv.addObject("pedidos", agendamentoRepo.findAll());
+        return mv;
+    }
+
+    
 }

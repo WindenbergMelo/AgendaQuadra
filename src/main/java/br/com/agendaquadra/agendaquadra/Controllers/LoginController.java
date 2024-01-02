@@ -16,7 +16,7 @@ public class LoginController {
     @Autowired
     private AdministradorRepo repo;
 
-    @GetMapping("/login")
+    @GetMapping("/loginController")
     public String index(){
         return "login";
     }

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-    @GetMapping("/agendamento")
+    @GetMapping("/agendamentoHome")
     public ModelAndView agendamento(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("agendamento");

@@ -1,6 +1,8 @@
 package br.com.agendaquadra.agendaquadra.Controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,16 @@ public class UsuarioController {
         return mv;
     }
 
+    @GetMapping("/listadm")
+    public ModelAndView listAdmin(){
+        List<TipoAcesso> tiposAcesso = Arrays.asList(TipoAcesso.ADMINISTRADORSISTEMA, TipoAcesso.ADMINISTRADORQUADRA);
+        List<Usuario> adminList = usuariorepositorio.findByTipoacessoIn(tiposAcesso);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/listaAdmin");
+        mv.addObject("administrador", adminList);
+        return mv;
+    }
+
     @GetMapping("/admin")
     public ModelAndView admin(){
         ModelAndView mv = new ModelAndView();
@@ -48,6 +60,16 @@ public class UsuarioController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login");
         mv.addObject("usuario", new Usuario());
+        return mv;
+    }
+
+    @GetMapping("/listcliente")
+    public ModelAndView listCliente(){
+        List<TipoAcesso> tiposAcesso = Arrays.asList(TipoAcesso.USUARIO, TipoAcesso.USUARIO);
+        List<Usuario> userList = usuariorepositorio.findByTipoacessoIn(tiposAcesso);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/listaUsuario");
+        mv.addObject("usuario", userList);
         return mv;
     }
 
